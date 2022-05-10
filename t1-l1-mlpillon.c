@@ -30,17 +30,17 @@ double fazLeiSenosAAL(double anguloDoLado, double angulo, double lado){
 	return ladoDoAngulo;	
 }
 
-double fazLeiSenosLLA(double ladoDoAngulo, double lado, double angulo){
-	double anguloDoLado;
+double fazLeiSenosLLA(double ladoOposto, double lado, double angulo){
+	double anguloOposto;
 	
-	anguloDoLado = ladoDoAngulo * sin(angulo) / sin(angulo);
+	anguloOposto = ladoOposto * sin(angulo) / sin(angulo);
 	
-	anguloDoLado = convertePraGraus(asin(anguloDoLado));
+	anguloOposto = convertePraGraus(asin(anguloOposto);
 		
 	return anguloDoLado;
 }
 
-double fazLeiCossenos(double ladoOposto, double lado2, double lado3){
+double fazLeiCossenosLLL(double ladoOposto, double lado2, double lado3){
 	double angulo, cosseno;
 	
 	cosseno = (lado2*lado2 + lado3*lado3 - ladoOposto*ladoOposto) / (2 * lado2 * lado3);
@@ -48,6 +48,14 @@ double fazLeiCossenos(double ladoOposto, double lado2, double lado3){
 	angulo = convertePraGraus(acos(cosseno));
 	
 	return angulo;
+}
+
+double fazLeiCossenosLAL(double lado1, double lado2, double angulo){
+	double ladoOposto;
+	
+	ladoOposto = sqrt(lado1 * lado1 + lado2 * lado2 + 2 * lado1 * lado2 + cos(angulo))
+	
+	return ladoOposto;
 }
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
@@ -87,51 +95,51 @@ int main(){
 		lado2 = aux[1];
 		lado3 = aux[2];
 
-		angulo1 = fazLeiCossenos(lado1, lado2, lado3);
-		angulo2 = fazLeiCossenos(lado2, lado1, lado3);
+		angulo1 = fazLeiCossenosLLL(lado1, lado2, lado3);
+		angulo2 = fazLeiCossenosLLL(lado2, lado1, lado3);
 		angulo3 = 180.0 - (angulo2 + angulo1);
 	}
 	
-	else if((strcmp(opcao, "LAL") == 0) || (strcmp(opcao, "lal") == 0)){
+	else if((strcmp(opcao, "LAL") == 0) || (strcmp(opcao, "lal") == 0)){ //dois lados e o ângulo entre eles
 		lado1 = aux[0];
-		angulo1 = aux[1];
+		angulo3 = aux[1];
 		lado2 = aux[2];
 		
-		angulo2 = fazLeiSenosLLA(lado2, lado1, convertePraRad(angulo1));
-		angulo2 = convertePraGraus(angulo2);
-		angulo3 = 180.0 - (angulo2 + angulo1);
-		lado3 = fazLeiSenosAAL(convertePraRad(angulo3), convertePraRad(angulo2), lado2);
+		lado3 = fazLeiCossenosLAL(lado1, lado2, convertePraRad(angulo3));
+		angulo2 = fazLeiSenosLLA(lado2, lado3, convertePraRad(angulo3))
+		angulo1 = 180.0 - (angulo2 + angulo3);
 	}
 	
-	else if((strcmp(opcao, "LLA") == 0) || (strcmp(opcao, "lla") == 0)){
+	else if((strcmp(opcao, "LLA") == 0) || (strcmp(opcao, "lla") == 0)){ //dois lados e o ângulo adjacente ao segundo lado e oposto ao primeiro
 		lado1 = aux[0];
 		lado2 = aux[1];
 		angulo1 = aux[2];
 		
-		angulo2 = fazLeiSenosLLA(lado2, lado1, convertePraRad(angulo1));
-		angulo2 = convertePraGraus(angulo2);
-		angulo3 = 180.0 - (angulo2 + angulo1);
-		lado3 = fazLeiSenosAAL(convertePraRad(angulo3), convertePraRad(angulo2), lado2);
+		//lei dos senos descobre angulo2
+		//descobre angulo 3
+		//descobre lado 3
+		
 	}
 	
-	else if((strcmp(opcao, "ALA") == 0) || (strcmp(opcao, "ala") == 0)){
+	else if((strcmp(opcao, "ALA") == 0) || (strcmp(opcao, "ala") == 0)){ //dois ângulos e o lado entre eles
 		angulo1 = aux[0];
-		lado1 = aux[1];
+		lado3 = aux[1];
 		angulo2 = aux[2];
-	
-		angulo3 = 180.0 - (angulo2 + angulo1);
-		lado2 = fazLeiSenosAAL(convertePraRad(angulo2), convertePraRad(angulo1), lado1);
-		lado3 = fazLeiSenosAAL(angulo3, convertePraRad(angulo1), lado1);
+		
+		//descobre angulo 3
+		//descobre lado 1
+		//descobre lado 2
 	}
 	
-	else if((strcmp(opcao, "AAL") == 0) || (strcmp(opcao, "aal") == 0)){
+	else if((strcmp(opcao, "AAL") == 0) || (strcmp(opcao, "aal") == 0)){ //dois ângulos e o lado adjacente ao segundo ângulo e oposto ao primeiro
 		angulo1 = aux[0];
 		angulo2 = aux[1];
 		lado1 = aux[2];
 		
-		angulo3 = 180.0 - (angulo2 + angulo1);
-		lado2 = fazLeiSenosAAL(convertePraRad(angulo2), convertePraRad(angulo1), lado1);
-		lado3 = fazLeiSenosAAL(convertePraRad(angulo3), convertePraRad(angulo1), lado1);
+		//descobre angulo 3
+		//descobre lado 2
+		//descobre lado 3
+		
 	}
 	
 	else{ 
