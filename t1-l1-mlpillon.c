@@ -52,12 +52,12 @@ double fazLeiCossenos(double ladoOposto, double lado2, double lado3){
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
 	system("cls");
-	printf("\n\nOs valores são:\nAngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
+	printf("Os valores são:\nAngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
 	printf("\nLados: %.2lf, %.2lf, %.2lf", lado1, lado2, lado3);
 }
 
 int main(){
-	setlocale(LC_ALL, "Portuguese");
+	//setlocale(LC_ALL, "Portuguese");
 	
 	double lado1 = 0.0, lado2 = 0.0, lado3 = 0.0;
 	double angulo1 = 0.0, angulo2 = 0.0, angulo3 = 0.0;
