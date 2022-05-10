@@ -17,33 +17,33 @@ double convertePraRad(double angulo){
 double convertePraGraus(double angulo){
 	double anguloGraus;
 	
-	anguloGraus = angulo * 180 / M_PI;
+	anguloGraus = angulo * 180.0 / M_PI;
 	
 	return anguloGraus;
 }
 
-double fazLeiSenosAAL(double anguloDoLado, double angulo, double lado){
-	double ladoDoAngulo;
+double fazLeiSenosAAL(double anguloOposto, double lado, double angulo){
+	double ladoOposto;
 	
-	ladoDoAngulo = lado * sin(anguloDoLado) / sin(angulo);
+	ladoOposto = lado * sin(convertePraRad(anguloOposto)) / sin(convertePraRad(angulo));
 	
-	return ladoDoAngulo;	
+	return ladoOposto;	
 }
 
 double fazLeiSenosLLA(double ladoOposto, double lado, double angulo){
 	double anguloOposto;
 	
-	anguloOposto = ladoOposto * sin(angulo) / sin(angulo);
+	anguloOposto = ladoOposto * sin(convertePraRad(angulo)) / lado;
 	
-	anguloOposto = convertePraGraus(asin(anguloOposto);
+	anguloOposto = convertePraGraus(asin(anguloOposto));
 		
-	return anguloDoLado;
+	return anguloOposto;
 }
 
 double fazLeiCossenosLLL(double ladoOposto, double lado2, double lado3){
 	double angulo, cosseno;
 	
-	cosseno = (lado2*lado2 + lado3*lado3 - ladoOposto*ladoOposto) / (2 * lado2 * lado3);
+	cosseno = (lado2 * lado2 + lado3 * lado3 - ladoOposto * ladoOposto) / (2 * lado2 * lado3);
 	
 	angulo = convertePraGraus(acos(cosseno));
 	
@@ -53,14 +53,13 @@ double fazLeiCossenosLLL(double ladoOposto, double lado2, double lado3){
 double fazLeiCossenosLAL(double lado1, double lado2, double angulo){
 	double ladoOposto;
 	
-	ladoOposto = sqrt(lado1 * lado1 + lado2 * lado2 + 2 * lado1 * lado2 + cos(angulo))
+	ladoOposto = sqrt(lado1 * lado1 + lado2 * lado2 + 2 * lado1 * lado2 * cos(convertePraRad(angulo)));
 	
 	return ladoOposto;
 }
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
-	system("cls");
-	printf("Os valores são:\nÂngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
+	printf("\n\nOs valores são:\nÂngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
 	printf("\nLados: %.2lf, %.2lf, %.2lf", lado1, lado2, lado3);
 }
 
@@ -90,7 +89,7 @@ int main(){
 	
 	printf("Os 3 valores digitados foram: %c: %.2lf, %c: %.2lf, %c: %.2lf", opcao[0], aux[0], opcao[1], aux[1], opcao[2], aux[2]);
 	
-	if((strcmp(opcao, "LLL") == 0) || (strcmp(opcao, "lll") == 0)){
+	if((strcmp(opcao, "LLL") == 0) || (strcmp(opcao, "lll") == 0)){ //três lados
 		lado1 = aux[0];
 		lado2 = aux[1];
 		lado3 = aux[2];
@@ -105,8 +104,8 @@ int main(){
 		angulo3 = aux[1];
 		lado2 = aux[2];
 		
-		lado3 = fazLeiCossenosLAL(lado1, lado2, convertePraRad(angulo3));
-		angulo2 = fazLeiSenosLLA(lado2, lado3, convertePraRad(angulo3))
+		lado3 = fazLeiCossenosLAL(lado1, lado2, angulo3);
+		angulo2 = fazLeiSenosLLA(lado2, lado3, angulo3);
 		angulo1 = 180.0 - (angulo2 + angulo3);
 	}
 	
@@ -115,10 +114,9 @@ int main(){
 		lado2 = aux[1];
 		angulo1 = aux[2];
 		
-		//lei dos senos descobre angulo2
-		//descobre angulo 3
-		//descobre lado 3
-		
+		angulo2 = fazLeiSenosLLA(lado2, lado1, angulo1);
+		angulo3 = 180.0 - (angulo2 + angulo1);
+		lado3 = fazLeiCossenosLAL(lado1, lado2, angulo3);
 	}
 	
 	else if((strcmp(opcao, "ALA") == 0) || (strcmp(opcao, "ala") == 0)){ //dois ângulos e o lado entre eles
@@ -126,9 +124,9 @@ int main(){
 		lado3 = aux[1];
 		angulo2 = aux[2];
 		
-		//descobre angulo 3
-		//descobre lado 1
-		//descobre lado 2
+		angulo3 = 180.0 - (angulo2 + angulo1);
+		lado1 = fazLeiSenosAAL(angulo1, lado3, angulo3);
+		lado2 = fazLeiCossenosLAL(lado3, lado1, angulo2);
 	}
 	
 	else if((strcmp(opcao, "AAL") == 0) || (strcmp(opcao, "aal") == 0)){ //dois ângulos e o lado adjacente ao segundo ângulo e oposto ao primeiro
@@ -136,10 +134,9 @@ int main(){
 		angulo2 = aux[1];
 		lado1 = aux[2];
 		
-		//descobre angulo 3
-		//descobre lado 2
-		//descobre lado 3
-		
+		angulo3 = 180.0 - (angulo2 + angulo1);
+		lado2 = fazLeiSenosAAL(angulo2, lado1, angulo1);
+		lado3 = fazLeiSenosAAL(angulo3, lado1, angulo1);
 	}
 	
 	else{ 
