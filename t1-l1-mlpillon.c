@@ -1,24 +1,3 @@
-/***
-Você deve implementar duas funções para a lei dos senos:
-
-uma que recebe dois ângulos e um lado, e retorna outro lado. O lado recebido é oposto ao primeiro ângulo, 
-o lado retornado é oposto ao segundo.
-uma que recebe dois lados e um ângulo, e retorna outro ângulo. O ângulo recebido é oposto ao primeiro lado, 
-o ângulo retornado é oposto ao segundo.
-
-Você deve implementar uma função para a lei dos cossenos:
-
-recebe três lados, retorna o ângulo oposto ao primeiro deles.
-As leis dos senos e cossenos só devem ser tratadas no programa por essas 3 funções. 
-
-Além dessas funções, você pode implementar funções auxiliares (como para cálculo de funções trigonométricas 
-com graus e conversões entre graus e radianos).
-
-Todos os ângulos acima estão em graus.
-
-Imprime os dados do triângulo (use uma função para isso, com 6 argumentos)
-***/
-
 #include <stdio.h>
 #include <locale.h>
 #include <string.h>
@@ -70,6 +49,7 @@ double fazLeiCossenos(double ladoOposto, double lado2, double lado3){
 }
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
+	system("cls");
 	printf("\n\nOs valores são:\nAngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
 	printf("\nLados: %.2lf, %.2lf, %.2lf", lado1, lado2, lado3);
 }
