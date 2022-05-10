@@ -52,25 +52,25 @@ double fazLeiCossenos(double ladoOposto, double lado2, double lado3){
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
 	system("cls");
-	printf("Os valores sÃ£o:\nAngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
+	printf("Os valores são:\nÂngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
 	printf("\nLados: %.2lf, %.2lf, %.2lf", lado1, lado2, lado3);
 }
 
 int main(){
-	//setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "Portuguese");
 	
 	double lado1 = 0.0, lado2 = 0.0, lado3 = 0.0;
 	double angulo1 = 0.0, angulo2 = 0.0, angulo3 = 0.0;
 	double aux[3];
 	char opcao[3];
 	
-	printf("OlÃ¡\nQual a sua opÃ§Ã£o de modalidade? ");
+	printf("Olá\nQual a sua opção de modalidade? ");
 	printf("\nModalidades aceitas: LLL, LAL, LLA, ALA, AAL. ");
 	scanf("%s", &opcao);
 	
-	printf("\nVocÃª escolheu: %s", opcao);
+	printf("\nVocê escolheu: %s", opcao);
 	
-	printf("\nDigite os trÃªs valores na mesma ordem da modalidade: ");
+	printf("\nDigite os 3 valores na mesma ordem da modalidade: ");
 	printf("Valor 1, %c: ", opcao[0]);
 	scanf("%lf", &aux[0]);
 	printf("Valor 2, %c: ", opcao[1]);
@@ -80,7 +80,7 @@ int main(){
 	
 	system("cls");
 	
-	printf("Os trÃªs valores digitados foram: %c: %.2lf, %c: %.2lf, %c: %.2lf", opcao[0], aux[0], opcao[1], aux[1], opcao[2], aux[2]);
+	printf("Os 3 valores digitados foram: %c: %.2lf, %c: %.2lf, %c: %.2lf", opcao[0], aux[0], opcao[1], aux[1], opcao[2], aux[2]);
 	
 	if((strcmp(opcao, "LLL") == 0) || (strcmp(opcao, "lll") == 0)){
 		lado1 = aux[0];
@@ -135,7 +135,7 @@ int main(){
 	}
 	
 	else{ 
-		printf("\nHmm. Algo nÃ£o deu certo.");
+		printf("\nHmm. Algo não deu certo.");
 		exit(-1);
 	}
 	
