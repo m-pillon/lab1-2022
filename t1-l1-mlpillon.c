@@ -53,12 +53,14 @@ double fazLeiCossenosLLL(double ladoOposto, double lado2, double lado3){
 double fazLeiCossenosLAL(double lado1, double lado2, double angulo){
 	double ladoOposto;
 	
-	ladoOposto = sqrt(lado1 * lado1 + lado2 * lado2 + 2 * lado1 * lado2 * cos(convertePraRad(angulo)));
+	ladoOposto = sqrt(lado1 * lado1 + lado2 * lado2 - 2 * lado1 * lado2 * cos(convertePraRad(angulo)));
 	
 	return ladoOposto;
 }
 
 void imprimeValores(double lado1, double lado2, double lado3, double angulo1, double angulo2, double angulo3){
+	
+	
 	printf("\n\nOs valores são:\nÂngulos: %.2lf, %.2lf, %.2lf", angulo1, angulo2, angulo3);
 	printf("\nLados: %.2lf, %.2lf, %.2lf", lado1, lado2, lado3);
 }
@@ -69,7 +71,7 @@ int main(){
 	double lado1 = 0.0, lado2 = 0.0, lado3 = 0.0;
 	double angulo1 = 0.0, angulo2 = 0.0, angulo3 = 0.0;
 	double aux[3];
-	char opcao[3];
+	char opcao[4];
 	
 	printf("Olá\nQual a sua opção de modalidade? ");
 	printf("\nModalidades aceitas: LLL, LAL, LLA, ALA, AAL. ");
@@ -89,7 +91,7 @@ int main(){
 	
 	printf("Os 3 valores digitados foram: %c: %.2lf, %c: %.2lf, %c: %.2lf", opcao[0], aux[0], opcao[1], aux[1], opcao[2], aux[2]);
 	
-	if((strcmp(opcao, "LLL") == 0) || (strcmp(opcao, "lll") == 0)){ //três lados
+	if(strcasecmp(opcao, "LLL") == 0){ //três lados
 		lado1 = aux[0];
 		lado2 = aux[1];
 		lado3 = aux[2];
@@ -99,7 +101,7 @@ int main(){
 		angulo3 = 180.0 - (angulo2 + angulo1);
 	}
 	
-	else if((strcmp(opcao, "LAL") == 0) || (strcmp(opcao, "lal") == 0)){ //dois lados e o ângulo entre eles
+	else if(strcasecmp(opcao, "LAL") == 0){ //dois lados e o ângulo entre eles
 		lado1 = aux[0];
 		angulo3 = aux[1];
 		lado2 = aux[2];
@@ -109,7 +111,7 @@ int main(){
 		angulo1 = 180.0 - (angulo2 + angulo3);
 	}
 	
-	else if((strcmp(opcao, "LLA") == 0) || (strcmp(opcao, "lla") == 0)){ //dois lados e o ângulo adjacente ao segundo lado e oposto ao primeiro
+	else if(strcasecmp(opcao, "LLA") == 0){ //dois lados e o ângulo adjacente ao segundo lado e oposto ao primeiro
 		lado1 = aux[0];
 		lado2 = aux[1];
 		angulo1 = aux[2];
@@ -119,7 +121,7 @@ int main(){
 		lado3 = fazLeiCossenosLAL(lado1, lado2, angulo3);
 	}
 	
-	else if((strcmp(opcao, "ALA") == 0) || (strcmp(opcao, "ala") == 0)){ //dois ângulos e o lado entre eles
+	else if(strcasecmp(opcao, "ALA") == 0){ //dois ângulos e o lado entre eles
 		angulo1 = aux[0];
 		lado3 = aux[1];
 		angulo2 = aux[2];
@@ -129,7 +131,7 @@ int main(){
 		lado2 = fazLeiCossenosLAL(lado3, lado1, angulo2);
 	}
 	
-	else if((strcmp(opcao, "AAL") == 0) || (strcmp(opcao, "aal") == 0)){ //dois ângulos e o lado adjacente ao segundo ângulo e oposto ao primeiro
+	else if(strcasecmp(opcao, "AAL") == 0){ //dois ângulos e o lado adjacente ao segundo ângulo e oposto ao primeiro
 		angulo1 = aux[0];
 		angulo2 = aux[1];
 		lado1 = aux[2];
