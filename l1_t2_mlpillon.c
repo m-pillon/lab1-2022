@@ -1,9 +1,11 @@
-//Mariana Lopes Pillon mlpillon
+//Mariana Lopes Pillon || mlpillon || CC2
 
 //comentei para propositos de debug quando estava tudo dando errado
+// gcc -Wall -o l1_t2_mlpillon l1_t2_mlpillon.c tela.c -lallegro_font -lallegro_color -lallegro_ttf -lallegro_primitives -lallegro
+
+#include "tela.h"
 
 #include <stdio.h>
-#include <locale.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
@@ -82,7 +84,7 @@ bool checa_escolha(int escolha){
 }
 
 int checa_vitoria(int l, int c, char t[l][c], int vez){
-	int i, j;
+	int i;
 
 	//horizontal
 	for(i = 0; i < 3; i++){
@@ -205,34 +207,38 @@ int realiza_partida(int vez, int *v_p1, int *v_p2, int *emp, int *d_p1, int *d_p
 	printf("\n\nTabuleiro final: ");
 	monta_tabuleiro(3, 3, tabuleiro);
 
-	return vitoria; 
+	return vitoria;
 }
 
 int main(){
-	setlocale(LC_ALL, "Portuguese");
+	tela_inicio(500, 500, "jogo_da_velha");
 
-	int continuar, ultimo_ganhador = 0, vez;
-	int v_p1 = 0, v_p2 = 0, emp = 0, d_p1 = 0, d_p2 = 0;
+	while(true) {
+        tela_retangulo(20, 20, 480, 480, 2, branco, transparente);
 
-	printf("Sejam bem-vindos!\n\nAmbos os jogadores, player 1 e player 2, começam com 0 pontos.");
+        int ultimo_ganhador = 0, vez;
+        //int v_p1 = 0, v_p2 = 0, emp = 0, d_p1 = 0, d_p2 = 0;
 
-	srand(time(NULL));
+        tela_texto(250, 180, 30, branco, "Sejam bem-vindos!");
+        tela_texto(250, 220, 15, branco, "Ambos os jogadores comecam com 0 pontos.");
+        tela_texto(250, 250, 15, branco, "Voce pode digitar qualquer tecla para sair.");
 
-	do{
-		printf("\n\nPara jogar, basta digitar 1. Para parar, digite 0.\nSua escolha: ");
-		scanf("%d", &continuar);
+        srand(time(NULL));
 
-		if(continuar == 0){
-			break;
-		}else{
-			vez = seleciona_jogador(ultimo_ganhador);
-			ultimo_ganhador = realiza_partida(vez, &v_p1, &v_p2, &emp, &d_p1, &d_p2);
-			exibe_placar(&v_p1, &v_p2, &emp, &d_p1, &d_p2);
+        while(tela_tecla() = '\0'){
+            vez = seleciona_jogador(ultimo_ganhador);
+            //ultimo_ganhador = realiza_partida(vez, &v_p1, &v_p2, &emp, &d_p1, &d_p2);
+            //exibe_placar(&v_p1, &v_p2, &emp, &d_p1, &d_p2);
+        }
 
-		}
-	}while(continuar != 0);
+        tela_atualiza();
 
-	printf("\nGG\nAté mais!");
+        if(tela_tecla() != '\0'){
+            break;
+        }
+    }
+
+    tela_fim();
 
 	return 0;
 }
