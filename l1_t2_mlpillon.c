@@ -194,12 +194,11 @@ int realiza_partida(int vez, int *v_p1, int *v_p2, int *emp, int *d_p1, int *d_p
 
 	}while(vitoria == 0);
 
-
-    printf("\nVitória do player %d!", vitoria);
-
 	if(vitoria == 1){
+		printf("\nVitória do player 1");
         *v_p1 = *v_p1 + 1;
 	}else if(vitoria == 2){
+		printf("\nVitória do player 2");
         *v_p2 = *v_p2 + 1;
 	}
 
